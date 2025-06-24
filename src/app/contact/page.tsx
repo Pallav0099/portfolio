@@ -13,13 +13,15 @@ export default function Contact() {
             <ContactForm />
           </div>
         </section>
-        <section className="py-20 bg-secondary">
+      </div>
+      <section className="py-20 bg-secondary">
+        <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center">Schedule a Meeting</h2>
           <div className="mt-8">
             <Scheduler />
           </div>
-        </section>
-      </div>
+        </div>
+      </section>
     </main>
   );
 } 

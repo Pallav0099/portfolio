@@ -6,14 +6,15 @@ import Link from "next/link";
 import { Github, Linkedin } from "lucide-react";
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
+import pfp from "./pfp.png"
 
-const skills = ["React", "Next.js", "TypeScript", "Tailwind CSS", "Node.js"];
+const skills = ["React", "Next.js", "TypeScript", "Tailwind CSS", "Node.js","MySQL","Supabase"];
 
 export function Hero() {
   return (
     <section className="relative py-20 overflow-hidden">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-gray-900 via-background to-background opacity-50"></div>
-      <div className="relative container mx-auto flex flex-col md:flex-row items-center gap-12 px-4">
+      <div className="relative container mx-auto flex flex-col md:flex-row items-center gap-12 pl-15 pr-4">
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -21,7 +22,7 @@ export function Hero() {
           className="relative w-48 h-48 rounded-full overflow-hidden shadow-[0_0_40px_rgba(255,255,255,0.15)]"
         >
           <Image
-            src="/pfp.png"
+            src={ pfp }
             alt="Pallav Singh"
             width={192}
             height={192}
@@ -49,7 +50,7 @@ export function Hero() {
             ))}
           </div>
           <div className="mt-6 flex justify-center md:justify-start gap-4">
-            <Link href="https://github.com/PallavSingh" target="_blank" rel="noopener noreferrer">
+            <Link href="https://github.com/Pallav0099" target="_blank" rel="noopener noreferrer">
               <Button variant="outline" size="icon">
                 <Github className="h-6 w-6" />
               </Button>
