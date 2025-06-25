@@ -13,7 +13,6 @@ export default function Home() {
       <div className="container mx-auto px-4">
         <Hero />
         <PreviousWork />
-        <GitHubActivity />
       </div>
       <Testimonials />
       <GamesSection />
