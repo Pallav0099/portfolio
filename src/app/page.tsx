@@ -5,6 +5,7 @@ import { Testimonials } from "@/components/testimonials";
 import { GitHubActivity } from "@/components/github-activity";
 import { ContactSection } from "@/components/contact-section";
 import { GamesSection } from "@/components/games-section";
+import { Footer } from "../components/footer";
 
 export default function Home() {
   return (
@@ -14,9 +15,8 @@ export default function Home() {
         <Hero />
         <PreviousWork />
       </div>
-      <Testimonials />
       <GamesSection />
-      <ContactSection />
+      <Footer />
     </main>
   );
 }

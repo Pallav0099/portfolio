@@ -6,7 +6,6 @@ import Link from "next/link";
 import { Github, Linkedin } from "lucide-react";
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
-import pfp from "./pfp.png"
 import { TextGenerateEffect } from "@/animations/Textgenerateeffect";
 
 const skills = ["React", "Next.js", "TypeScript", "Tailwind CSS", "Node.js","MySQL","Supabase"];
@@ -23,7 +22,7 @@ export function Hero() {
           className="relative w-48 h-48 mb-12 rounded-full overflow-hidden shadow-[0_0_40px_rgba(255,255,255,0.15)]"
         >
           <Image
-            src={ pfp }
+            src="/pfp.png"
             alt="Pallav Singh"
             width={192}
             height={192}

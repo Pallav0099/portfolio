@@ -14,7 +14,7 @@ export function Navbar() {
         <Link href="/">Pallav Singh</Link>
       </div>
       <div className="flex items-center gap-4">
-        <Link href="/work-experience">Work Experience</Link>
+        <Link href="/resume">Resume</Link>
         <Link href="/contact">Contact</Link>
         <Button
           variant="outline"
