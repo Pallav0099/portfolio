@@ -1,7 +1,17 @@
 "use client";
+
 import { useEffect } from "react";
 import { motion, stagger, useAnimate, useInView } from "framer-motion";
-import { cn } from "@/lib/utils";;
+import { cn } from "@/lib/utils";
+
+// ✅ Define props interface
+interface TextGenerateEffectProps {
+  words: string;
+  className?: string;
+  filter?: boolean;
+  duration?: number;
+  delay?: number;
+}
 
 export const TextGenerateEffect = ({
   words,
@@ -9,7 +19,7 @@ export const TextGenerateEffect = ({
   filter = true,
   duration = 0.5,
   delay = 0,
-}) => {
+}: TextGenerateEffectProps) => {
   const [scope, animate] = useAnimate();
   const isInView = useInView(scope, { once: true, margin: "-100px" });
   const wordsArray = words.split(" ");
