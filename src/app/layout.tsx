@@ -10,7 +10,7 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   title: "Pallav Singh | Developer Portfolio",
-  description: "A modern portfolio for a full-stack developer.",
+  description: "Full-Stack Developer & Creative Coder. Explore modern web development projects built with React, Next.js, TypeScript, Tailwind CSS, and more. From dynamic UI animations to full-stack applications, discover how I combine design, performance, and functionality to build standout digital experiences.",
 };
 
 export default function RootLayout({
