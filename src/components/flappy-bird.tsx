@@ -5,8 +5,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Button } from "./ui/button";
 
 const BIRD_SIZE = 30;
-const GAME_WIDTH = 500;
-const GAME_HEIGHT = 500;
+const GAME_WIDTH = 400;
+const GAME_HEIGHT = 400;
 const GRAVITY = 0.4;
 const JUMP_STRENGTH = 6.5;
 const PIPE_WIDTH = 60;
@@ -113,7 +113,7 @@ export function FlappyBird() {
   }
 
   return (
-    <Card className="w-fit mx-auto">
+    <Card className="w-fit mx-auto sm:max-w-[80vw]">
       <CardHeader>
         <CardTitle>Flappy Bird</CardTitle>
       </CardHeader>
