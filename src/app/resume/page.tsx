@@ -68,7 +68,7 @@ export default function Resume() {
                     <Github className="h-5 w-5 sm:h-6 sm:w-6" />
                   </Button>
                 </Link>
-                <Link href="https://linkedin.com/in/pallav-singh" target="_blank" rel="noopener noreferrer">
+                <Link href="https://www.linkedin.com/in/pallav-singh-aa11a2338" target="_blank" rel="noopener noreferrer">
                   <Button variant="outline" size="icon" className="h-9 w-9 sm:h-10 sm:w-10">
                     <Linkedin className="h-5 w-5 sm:h-6 sm:w-6" />
                   </Button>

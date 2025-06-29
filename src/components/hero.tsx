@@ -57,7 +57,7 @@ export function Hero() {
                 <Github className="h-5 w-5 sm:h-6 sm:w-6" />
               </Button>
             </Link>
-            <Link href="https://linkedin.com/in/pallav-singh" target="_blank" rel="noopener noreferrer">
+            <Link href="https://www.linkedin.com/in/pallav-singh-aa11a2338" target="_blank" rel="noopener noreferrer">
               <Button variant="outline" size="icon" className="h-10 w-10 sm:h-12 sm:w-12">
                 <Linkedin className="h-5 w-5 sm:h-6 sm:w-6" />
               </Button>
