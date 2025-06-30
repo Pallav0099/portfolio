@@ -24,10 +24,10 @@ const projects = [
     link: "https://annaokon.eu//"
   },
   {
-    title: "My own portfolio",
-    description: "Pretty recursive of me to mention my own portfolio here, no?",
-    image: "/portfolio.png",
-    link: "#"
+    title: "MNTN - A Hiking Guide",
+    description: "A frontend-only project emphasizing smooth animations and responsive UI design..",
+    image: "/mntn.png",
+    link: "https://mntn-hiking-guide-sepia.vercel.app/"
   },
 ];
 
