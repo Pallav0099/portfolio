@@ -13,7 +13,7 @@ export function GitHubActivity() {
     const octokit = new Octokit();
     octokit
       .request("GET /users/{username}/events/public", {
-        username: "PallavSingh",
+        username: "Pallav0099",
       })
       .then((response) => {
         setEvents(response.data.slice(0, 5));
