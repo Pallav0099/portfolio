@@ -42,7 +42,7 @@ export function Hero() {
             delay={0} 
             duration={1} 
             filter={true} 
-            words="I'm a passionate developer specializing in web and app development, with a keen interest in creating modern and intuitive user experiences." 
+            words="I'm a full stack web developer, with a keen interest in creating modern and intuitive user experiences." 
           />
           <div className="flex flex-wrap justify-center lg:justify-start gap-2 mb-6 lg:mb-8">
             {skills.map((skill) => (

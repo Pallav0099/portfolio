@@ -54,11 +54,11 @@ export function PreviousWork() {
                   className="rounded-md object-cover"
                 />
                 <Link href={project.link}>
-                  <CardHeader className="p-3 pt-2 pb-2 pl-0">
+                  <CardHeader className="pt-3 pb-2 pl-2 md:pt-2 md:pl-0">
                     <CardTitle>{project.title}</CardTitle>
                   </CardHeader>
                 </Link>
-                <p className="text-muted-foreground pb-3 pl-0">
+                <p className="text-muted-foreground pb-3 pl-2 md:pl-0">
                   {project.description}
                 </p>
               </CardContent>
