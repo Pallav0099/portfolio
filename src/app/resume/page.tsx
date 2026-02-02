@@ -152,7 +152,6 @@ export default function Resume() {
             <div className="text-white/60">{resumeData.education.institution}</div>
             <div className="text-xs text-white/40">{resumeData.education.current}</div>
             <div className="text-xs text-white/40">{resumeData.education.credits}</div>
-            <div className="text-xs text-emerald mt-2">{resumeData.education.recentPerformance}</div>
             <div className="text-xs text-white/40 mt-2">{resumeData.education.graduation}</div>
           </div>
         </motion.section>
