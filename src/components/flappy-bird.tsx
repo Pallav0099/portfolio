@@ -1,8 +1,6 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
-import { Button } from "./ui/button";
 
 const BIRD_SIZE = 30;
 const GAME_WIDTH = 400;
@@ -28,30 +26,25 @@ export function FlappyBird() {
     if (!gameStarted || gameOver) return;
 
     gameLoopRef.current = setInterval(() => {
-      // Gravity
       setBirdVelocity((v) => v + GRAVITY);
       setBirdPosition((pos) => pos + birdVelocity);
 
-      // Move pipes
       setPipes((currentPipes) =>
         currentPipes
           .map((pipe) => ({ ...pipe, x: pipe.x - 5 }))
           .filter((pipe) => pipe.x > -PIPE_WIDTH)
       );
 
-      // Collision detection
       const birdLeft = GAME_WIDTH / 2 - BIRD_SIZE / 2;
       const birdRight = GAME_WIDTH / 2 + BIRD_SIZE / 2;
       const birdTop = birdPosition - BIRD_SIZE / 2;
       const birdBottom = birdPosition + BIRD_SIZE / 2;
       
-      // Ground collision
-      if (birdBottom > GAME_HEIGHT) {
+      if (birdBottom > GAME_HEIGHT || birdTop < 0) {
         setGameOver(true);
         return;
       }
 
-      // Pipe collision
       for (let pipe of pipes) {
         const pipeLeft = pipe.x;
         const pipeRight = pipe.x + PIPE_WIDTH;
@@ -68,7 +61,6 @@ export function FlappyBird() {
         }
       }
       
-       // Scoring
       const passedPipe = pipes.find(
         (p) => p.x + PIPE_WIDTH < birdLeft && !p.passed
       );
@@ -81,7 +73,7 @@ export function FlappyBird() {
         );
       }
 
-    }, 1000 / 60); // 60 FPS
+    }, 1000 / 60);
 
     return () => clearInterval(gameLoopRef.current);
   }, [gameStarted, gameOver, birdVelocity, pipes]);
@@ -98,7 +90,7 @@ export function FlappyBird() {
   }, [gameStarted, gameOver]);
 
   const handleJump = () => {
-    if (!gameOver) {
+    if (!gameOver && gameStarted) {
       setBirdVelocity(-JUMP_STRENGTH);
     }
   };
@@ -113,82 +105,92 @@ export function FlappyBird() {
   }
 
   return (
-    <Card className="w-fit mx-auto sm:max-w-[80vw]">
-      <CardHeader>
-        <CardTitle>Flappy Bird</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <div
-          className="relative overflow-hidden bg-blue-300 dark:bg-blue-800"
-          style={{ width: GAME_WIDTH, height: GAME_HEIGHT }}
-          onClick={handleJump}
-        >
-          {!gameStarted ? (
-            <div className="absolute inset-0 flex items-center justify-center">
-              <Button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  startGame();
-                }}
-              >
-                Start Game
-              </Button>
-            </div>
-          ) : (
-            <>
-              <div
-                className="absolute bg-yellow-400 rounded-full"
-                style={{
-                  width: BIRD_SIZE,
-                  height: BIRD_SIZE,
-                  top: birdPosition - BIRD_SIZE / 2,
-                  left: GAME_WIDTH / 2 - BIRD_SIZE / 2,
-                  transform: `rotate(${birdVelocity * 3}deg)`,
-                  transition: "transform 150ms linear",
-                }}
-              />
-              {pipes.map((pipe) => (
-                <div key={pipe.id}>
-                  <div
-                    className="absolute bg-green-500 border-2 border-gray-800"
-                    style={{
-                      left: pipe.x,
-                      top: 0,
-                      width: PIPE_WIDTH,
-                      height: pipe.topHeight,
-                    }}
-                  />
-                  <div
-                    className="absolute bg-green-500 border-2 border-gray-800"
-                    style={{
-                      left: pipe.x,
-                      top: pipe.topHeight + PIPE_GAP,
-                      width: PIPE_WIDTH,
-                      height: GAME_HEIGHT - pipe.topHeight - PIPE_GAP,
-                    }}
-                  />
-                </div>
-              ))}
-              <div className="absolute top-4 left-4 text-white text-3xl font-bold [text-shadow:2px_2px_4px_#000]">
-                Score: {score}
-              </div>
-              {gameOver && (
-                <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/50">
-                    <p className="text-white text-4xl font-bold mb-4 [text-shadow:2px_2px_4px_#000]">Game Over</p>
-                    <Button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        startGame();
-                      }}
-                    >
-                      Play Again
-                    </Button>
-                </div>
-              )}
-            </>
-          )}
+    <div className="w-fit mx-auto border border-white/10 p-6 bg-black">
+      <div className="mb-6 border-b border-white/10 pb-4">
+        <div className="flex items-center gap-3 mb-2">
+          <div className="w-2 h-2 bg-emerald pulse-emerald rounded-full"></div>
+          <span className="text-xs text-white/60 uppercase tracking-wider font-mono">Flappy Bird</span>
         </div>
-      </CardContent>
-    </Card>
+        <h2 className="text-2xl font-bold font-mono mb-2">Game</h2>
+        <p className="text-sm text-white/60">Click or press spacebar to make the bird jump. Avoid the pipes!</p>
+      </div>
+
+      <div
+        className="relative overflow-hidden bg-black border border-white/10 cursor-pointer"
+        style={{ width: GAME_WIDTH, height: GAME_HEIGHT }}
+        onClick={handleJump}
+      >
+        {!gameStarted ? (
+          <div className="absolute inset-0 flex items-center justify-center border border-white/10">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                startGame();
+              }}
+              className="border border-white/10 px-6 py-3 text-sm font-mono uppercase tracking-wider hover:border-emerald hover:text-emerald transition-colors"
+            >
+              Start Game
+            </button>
+          </div>
+        ) : (
+          <>
+            <div
+              className="absolute bg-white rounded-full border border-white/20"
+              style={{
+                width: BIRD_SIZE,
+                height: BIRD_SIZE,
+                top: birdPosition - BIRD_SIZE / 2,
+                left: GAME_WIDTH / 2 - BIRD_SIZE / 2,
+                transform: `rotate(${birdVelocity * 3}deg)`,
+                transition: "transform 150ms linear",
+              }}
+            />
+            {pipes.map((pipe) => (
+              <div key={pipe.id}>
+                <div
+                  className="absolute bg-white border border-white/20"
+                  style={{
+                    left: pipe.x,
+                    top: 0,
+                    width: PIPE_WIDTH,
+                    height: pipe.topHeight,
+                  }}
+                />
+                <div
+                  className="absolute bg-white border border-white/20"
+                  style={{
+                    left: pipe.x,
+                    top: pipe.topHeight + PIPE_GAP,
+                    width: PIPE_WIDTH,
+                    height: GAME_HEIGHT - pipe.topHeight - PIPE_GAP,
+                  }}
+                />
+              </div>
+            ))}
+            <div className="absolute top-4 left-4 text-white text-xl font-bold font-mono">
+              Score: {score}
+            </div>
+            {gameOver && (
+              <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/90 border border-white/10">
+                <p className="text-white text-2xl font-bold font-mono mb-6">Game Over</p>
+                <p className="text-white/60 text-sm font-mono mb-4">Final Score: {score}</p>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    startGame();
+                  }}
+                  className="border border-white/10 px-6 py-3 text-sm font-mono uppercase tracking-wider hover:border-emerald hover:text-emerald transition-colors"
+                >
+                  Play Again
+                </button>
+              </div>
+            )}
+          </>
+        )}
+      </div>
+      <div className="mt-4 text-xs text-white/40 font-mono">
+        Click to jump • Spacebar supported
+      </div>
+    </div>
   );
-} 
+}

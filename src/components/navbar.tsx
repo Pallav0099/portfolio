@@ -1,83 +1,48 @@
 "use client";
 
 import Link from "next/link";
-import { useTheme } from "next-themes";
-import { Button } from "@/components/ui/button";
-import { Moon, Sun, Menu, X } from "lucide-react";
 import { useState } from "react";
+import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
+const navLinks = [
+  { href: "/resume", label: "RESUME" },
+  { href: "/contact", label: "CONTACT" },
+  { href: "/games/flappy-bird", label: "FLAPPY_BIRD" },
+  { href: "/games/tic-tac-toe", label: "TIC_TAC_TOE" },
+];
+
 export function Navbar() {
-  const { theme, setTheme } = useTheme();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-
-  const navLinks = [
-    { href: "/resume", label: "Resume" },
-    { href: "/contact", label: "Contact" },
-  ];
-
   return (
-    <nav className="sticky top-0 z-50 bg-background/80 backdrop-blur-sm border-b border-border">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <nav className="sticky top-0 z-50 bg-black border-b border-white/10 backdrop-blur-sm">
+      <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <div className="text-lg font-bold">
-            <Link href="/" className="hover:text-primary transition-colors">
-              Pallav Singh
-            </Link>
-          </div>
+          <Link href="/" className="text-white font-mono text-sm hover:text-emerald transition-colors">
+            <span className="text-emerald">~$</span> pallav_singh
+          </Link>
 
-          {/* Desktop Theme Toggle & nav items */}
-          <div className="hidden md:flex items-center gap-4">
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center gap-6">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-sm font-medium hover:text-primary transition-colors"
+                className="text-white/60 font-mono text-xs hover:text-emerald transition-colors uppercase tracking-wider"
               >
                 {link.label}
               </Link>
             ))}
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="h-9 w-9"
-            >
-              <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-              <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-              <span className="sr-only">Toggle theme</span>
-            </Button>
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="md:hidden flex items-center gap-2">
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="h-9 w-9"
-            >
-              <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-              <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-              <span className="sr-only">Toggle theme</span>
-            </Button>
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={toggleMenu}
-              className="h-9 w-9"
-            >
-              {isMenuOpen ? (
-                <X className="h-5 w-5" />
-              ) : (
-                <Menu className="h-5 w-5" />
-              )}
-              <span className="sr-only">Toggle menu</span>
-            </Button>
-          </div>
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="md:hidden text-white font-mono text-xs"
+          >
+            {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
         </div>
 
         {/* Mobile Menu */}
@@ -87,8 +52,7 @@ export function Navbar() {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.2 }}
-              className="md:hidden border-t border-border"
+              className="md:hidden border-t border-white/10"
             >
               <div className="py-4 space-y-2">
                 {navLinks.map((link, index) => (
@@ -96,14 +60,14 @@ export function Navbar() {
                     key={link.href}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.1 }}
+                    transition={{ delay: index * 0.05 }}
                   >
                     <Link
                       href={link.href}
                       onClick={() => setIsMenuOpen(false)}
-                      className="block px-4 py-2 text-sm font-medium hover:text-primary hover:bg-accent rounded-md transition-colors"
+                      className="block px-4 py-2 text-white/60 font-mono text-xs hover:text-emerald hover:bg-white/5 transition-colors uppercase tracking-wider"
                     >
-                      {link.label}
+                      <span className="text-emerald">$</span> {link.label.toLowerCase()}
                     </Link>
                   </motion.div>
                 ))}
@@ -114,4 +78,4 @@ export function Navbar() {
       </div>
     </nav>
   );
-} 
+}

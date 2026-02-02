@@ -1,22 +1,19 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Button } from "./ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
-import { motion } from "framer-motion";
 
-const Square = ({ value, onClick }: { value: string; onClick: () => void }) => (
-  <Button
-    variant="outline"
-    className="w-20 h-20 text-4xl font-bold"
+const Square = ({ value, onClick }: { value: string | null; onClick: () => void }) => (
+  <button
     onClick={onClick}
+    className="w-20 h-20 text-3xl font-bold font-mono border border-white/10 bg-black hover:border-emerald hover:text-emerald transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+    disabled={!!value}
   >
-    {value}
-  </Button>
+    {value || "_"}
+  </button>
 );
 
 export function TicTacToe() {
-  const [board, setBoard] = useState(Array(9).fill(null));
+  const [board, setBoard] = useState<Array<string | null>>(Array(9).fill(null));
   const [isXNext, setIsXNext] = useState(true);
   const winner = calculateWinner(board);
 
@@ -60,34 +57,47 @@ export function TicTacToe() {
   }
 
   return (
-    <Card className="w-fit mx-auto">
-      <CardHeader>
-        <CardTitle>Tic-Tac-Toe</CardTitle>
-      </CardHeader>
-      <CardContent className="flex flex-col items-center gap-4">
-        <div className="text-xl font-semibold">{status}</div>
-        <div className="grid grid-cols-3 gap-1">
+    <div className="w-fit mx-auto border border-white/10 p-6 bg-black">
+      <div className="mb-6 border-b border-white/10 pb-4">
+        <div className="flex items-center gap-3 mb-2">
+          <div className="w-2 h-2 bg-emerald pulse-emerald rounded-full"></div>
+          <span className="text-xs text-white/60 uppercase tracking-wider font-mono">Tic Tac Toe</span>
+        </div>
+        <h2 className="text-2xl font-bold font-mono mb-2">Game</h2>
+        <p className="text-sm text-white/60">Play against the AI. You are X, the AI is O.</p>
+      </div>
+
+      <div className="flex flex-col items-center gap-6">
+        <div className="text-sm font-mono uppercase tracking-wider text-white/80 border border-white/10 px-4 py-2">
+          {status}
+        </div>
+        <div className="grid grid-cols-3 gap-1 border border-white/10 p-2">
           {renderSquare(0)}
           {renderSquare(1)}
           {renderSquare(2)}
         </div>
-        <div className="grid grid-cols-3 gap-1">
+        <div className="grid grid-cols-3 gap-1 border border-white/10 p-2">
           {renderSquare(3)}
           {renderSquare(4)}
           {renderSquare(5)}
         </div>
-        <div className="grid grid-cols-3 gap-1">
+        <div className="grid grid-cols-3 gap-1 border border-white/10 p-2">
           {renderSquare(6)}
           {renderSquare(7)}
           {renderSquare(8)}
         </div>
-        <Button onClick={handleReset}>Reset Game</Button>
-      </CardContent>
-    </Card>
+        <button
+          onClick={handleReset}
+          className="border border-white/10 px-6 py-3 text-sm font-mono uppercase tracking-wider hover:border-emerald hover:text-emerald transition-colors"
+        >
+          Reset Game
+        </button>
+      </div>
+    </div>
   );
 }
 
-function calculateWinner(squares: any[]) {
+function calculateWinner(squares: Array<string | null>): string | null {
   const lines = [
     [0, 1, 2],
     [3, 4, 5],
@@ -107,8 +117,7 @@ function calculateWinner(squares: any[]) {
   return null;
 }
 
-function findBestMove(board: any[]) {
-  // 1. AI checks if it can win
+function findBestMove(board: Array<string | null>): number | null {
   for (let i = 0; i < 9; i++) {
     if (!board[i]) {
       const newBoard = board.slice();
@@ -119,7 +128,6 @@ function findBestMove(board: any[]) {
     }
   }
 
-  // 2. AI checks if it needs to block
   for (let i = 0; i < 9; i++) {
     if (!board[i]) {
       const newBoard = board.slice();
@@ -130,17 +138,14 @@ function findBestMove(board: any[]) {
     }
   }
 
-  // 3. AI takes the center if available
   if (!board[4]) return 4;
 
-  // 4. AI takes a random corner
   const corners = [0, 2, 6, 8];
   const availableCorners = corners.filter((i) => !board[i]);
   if (availableCorners.length > 0) {
     return availableCorners[Math.floor(Math.random() * availableCorners.length)];
   }
 
-  // 5. AI takes a random side
   const sides = [1, 3, 5, 7];
   const availableSides = sides.filter((i) => !board[i]);
   if (availableSides.length > 0) {
@@ -148,4 +153,4 @@ function findBestMove(board: any[]) {
   }
 
   return null;
-} 
+}
