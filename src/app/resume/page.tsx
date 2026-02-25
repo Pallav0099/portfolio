@@ -22,11 +22,11 @@ const resumeData = {
   },
   projects: [
     {
-      title: "Skyport",
+      title: "Skytunnel",
       type: "MVP",
       points: [
-        "Architected reverse proxy service using Next.js API routes with libcurl for HTTP tunneling, deploying distributed VPS network across multiple nodes for zero-inspection traffic routing",
-        "Automated traffic flow management with custom routing algorithms and connection pooling, achieving low-latency packet forwarding through distributed architecture",
+        "Built a high-performance reverse proxy for zero-config ingress, providing instant, secure public URLs for local environments via SSH reverse tunnels.",
+        "Engineered a zero-knowledge, key-based architecture routing traffic through a distributed VPS network with E2E encryption and zero inspection.",
       ],
     },
     {

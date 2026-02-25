@@ -5,29 +5,30 @@ import { Footer } from "@/components/footer";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { 
-  Code, 
-  Type, 
-  Atom, 
-  Palette, 
-  Move, 
-  Database, 
-  Box, 
-  Globe, 
-  Container, 
-  Terminal, 
-  Network, 
-  GitBranch, 
-  Workflow, 
-  FileCode, 
-  Brain, 
-  Cpu, 
+import {
+  Code,
+  Type,
+  Atom,
+  Palette,
+  Move,
+  Database,
+  Box,
+  Globe,
+  Container,
+  Terminal,
+  Network,
+  GitBranch,
+  Workflow,
+  FileCode,
+  Brain,
+  Cpu,
   TrendingUp,
   Layers,
   Zap
 } from "lucide-react";
 
 const commandModules = [
+  { id: "SKYTUNNEL", label: "Skytunnel", href: "https://skytunnel.dev/", status: "ACTIVE", desc: "High-performance reverse proxy for instant public URLs" },
   { id: "RESUME", label: "Resume", href: "/resume", status: "ACTIVE", desc: "View my professional experience and skills" },
   { id: "CONTACT", label: "Contact", href: "/contact", status: "ACTIVE", desc: "Get in touch with me" },
   { id: "FLAPPY_BIRD", label: "Flappy Bird", href: "/games/flappy-bird", status: "ACTIVE", desc: "Play the classic game" },
@@ -134,6 +135,8 @@ export default function Home() {
               >
                 <Link
                   href={module.href}
+                  target={module.href.startsWith("http") ? "_blank" : undefined}
+                  rel={module.href.startsWith("http") ? "noopener noreferrer" : undefined}
                   className="block border border-white/10 p-6 hover:border-emerald hover:bg-white/5 transition-all group"
                 >
                   <div className="flex items-center justify-between mb-3">
